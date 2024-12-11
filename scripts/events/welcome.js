@@ -22,14 +22,14 @@ module.exports = {
 			defaultWelcomeMessage: "Xin chào {userName}.\nChào mừng bạn đến với {boxName}.\nChúc bạn có buổi {session} vui vẻ!"
 		},
 		en: {
-			session1: "𝗺𝗼𝗿𝗻𝗶𝗻𝗴",
-			session2: "𝗻𝗼𝗼𝗻",
-			session3: "𝗮𝗳𝘁𝗲𝗿𝗻𝗼𝗼𝗻",
-			session4: "𝗲𝘃𝗲𝗻𝗶𝗻𝗴",
-			welcomeMessage: "😘 𝗔𝘀𝘀𝗮𝗹𝗮𝗺𝘂 𝗮𝗹𝗮𝗶𝗸𝘂𝗺 😘\n\n 𝗧𝗵𝗮𝗻𝗸 𝘆𝗼𝘂 𝗳𝗼𝗿 𝗶𝗻𝘃𝗶𝘁𝗶𝗻𝗴 𝗺𝗲 𝘁𝗼 𝘁𝗵𝗲 𝗴𝗿𝗼𝘂𝗽!\n 𝗕𝗼𝘁 𝗽𝗿𝗲𝗳𝗶𝘅: %1\n𝗧𝗼 𝘃𝗶𝗲𝘄 𝘁𝗵𝗲 𝗹𝗶𝘀𝘁 𝗼𝗳 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀, 𝗽𝗹𝗲𝗮𝗰𝗲 𝗲𝗻𝘁𝗲𝗿: %1𝗵𝗲𝗹𝗽\n\n♻ 𝗜 𝗵𝗼𝗽𝗲 𝘆𝗼𝘂 𝘄𝗶𝗹𝗹 𝗳𝗼𝗹𝗹𝗼𝘄 𝗼𝘂𝗿 𝗮𝗹𝗹 𝗴𝗿𝗼𝘂𝗽 𝗿𝘂𝗹𝗲𝘀 ♻",
-			multiple1: "𝘆𝗼𝘂",
-			multiple2: "𝘆𝗼𝘂 𝗴𝘂𝘆𝘀",
-			defaultWelcomeMessage: `🍒𝗔𝘀𝘀𝗮𝗹𝗮𝗺𝘂 𝗮𝗹𝗮𝗶𝗸𝘂𝗺🍒\n\n 𝗛𝗲𝗹𝗹𝗼 {userName}.\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 {multiple} 𝗧𝗼 𝘁𝗵𝗲 𝗰𝗮𝘁 𝗴𝗿𝗼𝘂𝗽: {boxName}\n 𝗛𝗮𝘃𝗲 𝗮 𝗻𝗶𝗰𝗲 {session} \n\n♻ 𝗜 𝗵𝗼𝗽𝗲 𝘆𝗼𝘂 𝘄𝗶𝗹𝗹 𝗳𝗼𝗹𝗹𝗼𝘄 𝗼𝘂𝗿 𝗮𝗹𝗹 𝗴𝗿𝗼𝘂𝗽 𝗿𝘂𝗹𝗲𝘀 ♻\n\n🐔🌬 𝗔𝗽𝗻𝗮𝗸𝗲 𝗮𝗺𝗮𝗱𝗲𝗿 𝗮𝗶 𝗴𝗿𝗼𝘂𝗽𝗲 𝗮𝘀𝗮𝗿 𝗷𝗼𝗻𝗻𝗼 𝗮𝗻𝗲𝗸 𝗼𝗻𝗲𝗸 𝘀𝘂𝗯𝗲𝗰𝗰𝗵𝗮 😘😊`
+			session1: "morning",
+			session2: "noon",
+			session3: "afternoon",
+			session4: "evening",
+			welcomeMessage: "(⁠✿⁠ ⁠♡⁠‿⁠♡⁠) | Thank you for inviting me to the group 🎀\nthis is my prefix: %1\nthis bot for educational purposes only.",
+			multiple1: "you",
+			multiple2: "you guys",
+			defaultWelcomeMessage: `(⁠つ⁠≧⁠▽⁠≦⁠)⁠つ | Hello {userName} 🎀.\n\nWelcome to the {boxName} group chat, free to ask anything but for educational purposes only.\n\nThis group chat is for educational purposes only. Please respect these rules to keep the space positive and productive.\nHere's the All GC RULES:\n— Respect All Members: Treat everyone with courtesy and kindness.\n— No Bullying or Harassment: This is a safe space. Be respectful and mindful of others.\n— No Bad Words or Uncomfortable Language: Keep the conversation appropriate for all.\n— No Spamming: Stick to relevant topics and share valuable information.\n— Keep the Group Format: Don't change the name, cover photo, theme, or emojis.\n— Keep Your Nickname: Avoid changing your nickname in the chat.\n\nConsequences:\n\nWarnings (⚠️): You will receive warnings for breaking any of the rules.\nBanned (🚫): After u have 3 warnings, you will be banned from the group chat and removed.\n\nif u don't know how to use a bot here's a tutorial:https://www.facebook.com/100020946066095/posts/pfbid0kcVHEu7BUJ492sdvigaShbxhLBQXt8GiyTHS593dx6PG73An9MTx1MacDDHo2q8Zl/\n\nhave a nice {session} 😊`
 		}
 	},
 
