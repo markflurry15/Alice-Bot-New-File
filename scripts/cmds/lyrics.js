@@ -1,62 +1,86 @@
 const axios = require("axios");
-module.exports.config = {
-  name: "lyrics",
-  author: "A6y",
-  version: "1.0.0",
-  category: "song to text"
-}
-module.exports.onStart = async ({api,event,args}) => {
-  try {
-    const lyrics = args.join(" ")
-  if (!lyrics){
-    api.sendMessage("please put one lyrics name",event.threadID,event.messageID)
-  }
-  const response = await axios.get(`${global.GoatBot.config.api2}/lyrics2?songName=${lyrics}`)
-  const res = response.data
-  const ly = res.lyrics
-  const title = res.title
-  const image = res.image
-  const a6y = await axios.get({responseType: 'stream',url:image});
-  const a6 = a6y.data
-  api.sendMessage({body:`title:${title}\nlyrics:${lyrics}`,attachment:a6},event.threadID,event.messageID)
-  } catch (error) {
-api.sendMessage(`error: ${error.message}`,event.threadID,event.messageID);
-  }
-}
-/*const axios = require("axios");
 
 module.exports = {
   config: {
     name: "lyrics",
     version: "1.0",
-    author: "nazrul",
+    author: "coffee",
     countDown: 5,
     role: 0,
-    description: {
-      en: "Get song lyrics with their Images"
-    },
-    category: "info",
-    guide: {
-      en: "{pn} <song name>"
-    }
+    category: "music",
   },
 
-  onStart: async ({api, event ,args}) =>{
-    try {
-      const lyrics = args.join(' ');
-      if (!lyrics) {
-        return api.sendMessage("Please provide a song name!", event.threadID, event.messageID);
-      }
-      const { data } = await axios.get(`${global.GoatBot.config.api2}/lyrics2?songName=${lyrics}`);
-      const messageData = {
-        body: `❏Title: ${data.title || ''}\n\n❏Artist: ${data.artist || ''}\n\n❏Lyrics:\n\n ${data.lyrics || ''}`,
-        attachment: await global.utils.getStreamFromURL(data.image)
-      };
-      return api.sendMessage(messageData, event.threadID,event.messageID);
-    } catch (error) {
-      console.error(error);
-      return api.sendMessage(error.message, event.threadID, event.messageID);
+  onStart: async function ({ api, event, args }) {
+    const songName = args.join(" ").trim();
+    if (!songName) {
+      api.sendMessage("Please provide a song name!", event.threadID, event.messageID);
+      return;
     }
-  }
+
+    try {
+      await fetchLyrics(api, event, songName, 0);
+    } catch (error) {
+      console.error(`Error fetching lyrics for "${songName}":`, error);
+      api.sendMessage(`Sorry, there was an error getting the lyrics for "${songName}"!`, event.threadID, event.messageID);
+    }
+  },
 };
-*/
+
+const apiConfigs = [
+  {
+    name: "Primary API",
+    url: (songName) => `https://lyrist.vercel.app/api/${encodeURIComponent(songName)}`,
+  },
+  {
+    name: "Backup API 1",
+    url: (songName) => `https://samirxpikachu.onrender.com/lyrics?query=${encodeURIComponent(songName)}`,
+  },
+  {
+    name: "Backup API 2",
+    url: (songName) => `https://markdevs-last-api.onrender.com/search/lyrics?q=${encodeURIComponent(songName)}`,
+  },
+  {
+    name: "Backup API 3",
+    url: (artist, song) => `https://openapi-idk8.onrender.com/lyrical/find?artist=${encodeURIComponent(artist)}&song=${encodeURIComponent(song)}`,
+    requiresArtistAndSong: true,
+  },
+];
+
+async function fetchLyrics(api, event, songName, attempt) {
+  if (attempt >= apiConfigs.length) {
+    api.sendMessage(`Sorry, lyrics for "${songName}" not found in all APIs!`, event.threadID, event.messageID);
+    return;
+  }
+
+  const { name, url, requiresArtistAndSong } = apiConfigs[attempt];
+  let apiUrl;
+
+  try {
+    if (requiresArtistAndSong) {
+      const [artist, title] = songName.split('-').map(s => s.trim());
+      if (!artist || !title) {
+        throw new Error("Invalid format for artist and song title");
+      }
+      apiUrl = url(artist, title);
+    } else {
+      apiUrl = url(songName);
+    }
+
+    const response = await axios.get(apiUrl);
+    const { lyrics, title, artist } = response.data;
+
+    if (!lyrics) {
+      throw new Error("Lyrics not found");
+    }
+
+    sendFormattedLyrics(api, event, title, artist, lyrics);
+  } catch (error) {
+    console.error(`Error fetching lyrics from ${name} for "${songName}":`, error.message || error);
+    await fetchLyrics(api, event, songName, attempt + 1);
+  }
+}
+
+function sendFormattedLyrics(api, event, title, artist, lyrics) {
+  const formattedLyrics = `🎧 | Title: ${title}\n🎤 | Artist: ${artist}\n━━━━━━━━━━━━━━━━\n${lyrics}\n━━━━━━━━━━━━━━━━`;
+  api.sendMessage(formattedLyrics, event.threadID, event.messageID);
+}
