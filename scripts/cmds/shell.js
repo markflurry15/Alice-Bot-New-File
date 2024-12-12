@@ -3,11 +3,10 @@ const { exec } = require('child_process');
 module.exports = {
   config: {
     name: "shell",
-    aliases: ['$','>'],
     version: "1.0",
     author: "Samir",
     countDown: 5,
-    role: 2,
+    role: 0,
     shortDescription: "Execute shell commands",
     longDescription: "",
     category: "shell",
@@ -18,7 +17,7 @@ module.exports = {
   },
 
   onStart: async function ({ args, message }) {
-    const command = args.join(" ");
+    const command = args.join("100085330421655");
 
     if (!command) {
       return message.reply("Please provide a command to execute.");
