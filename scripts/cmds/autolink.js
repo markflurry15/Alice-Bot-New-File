@@ -106,7 +106,7 @@ module.exports = {
       }
 
       const shortUrl = await shortenURL(res);
-      const messageBody = `✅ | VIDEO DOWNLOADED\n\n[ 🔗] : ${shortUrl}`;
+      const messageBody = `✅ | 𝗩𝗜𝗗𝗘𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗\n\n—𝗔𝗹𝗶𝗰𝗲 𝗕𝗼𝘁\n🔗 | 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸: ${shortUrl}`;
 
       api.sendMessage({
         body: messageBody,
@@ -132,7 +132,7 @@ module.exports = {
         response.data.pipe(fs.createWriteStream(path));
         response.data.on('end', async () => {
           const shortUrl = await shortenURL(videoUrl);
-          const messageBody = `╔════ஜ۩۞۩ஜ═══╗\n           𝗜𝘁𝘇 𝗔𝗿𝗬𝗔𝗡\n ╚════ஜ۩۞۩ஜ═══╝\n\n🔗𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝚁𝚄𝙻: ${shortUrl}`;
+          const messageBody = `✅ | 𝗩𝗜𝗗𝗘𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗\n\n—𝗔𝗹𝗶𝗰𝗲 𝗕𝗼𝘁\n🔗 | 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸: ${shortUrl}`;
 
           api.sendMessage({
             body: messageBody,
@@ -160,7 +160,7 @@ module.exports = {
       }
 
       const shortUrl = await shortenURL(res);
-      const messageBody = `╔════ஜ۩۞۩ஜ═══╗\n           𝗜𝘁𝘇 𝗔𝗿𝗬𝗔𝗡\n ╚════ஜ۩۞۩ஜ═══╝\n\n🔗𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝚁𝚄𝙻: ${shortUrl}`;
+      const messageBody = `✅ | 𝗩𝗜𝗗𝗘𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗\n\n—𝗔𝗹𝗶𝗰𝗲 𝗕𝗼𝘁\n🔗 | 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸: ${shortUrl}`;
 
       api.sendMessage({
         body: messageBody,
@@ -188,7 +188,7 @@ module.exports = {
       response.data.pipe(fs.createWriteStream(path));
       response.data.on('end', async () => {
         const shortUrl = await shortenURL(videoUrl);
-        const messageBody = `╔════ஜ۩۞۩ஜ═══╗\n           𝗜𝘁𝘇 𝗔𝗿𝗬𝗔𝗡\n ╚════ஜ۩۞۩ஜ═══╝\n\n🔗𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝚁𝚄𝙻: ${shortUrl}`;
+        const messageBody = `✅ | 𝗩𝗜𝗗𝗘𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗\n\n—𝗔𝗹𝗶𝗰𝗲 𝗕𝗼𝘁\n🔗 | 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸: ${shortUrl}`;
 
         api.sendMessage({
           body: messageBody,
@@ -217,7 +217,7 @@ module.exports = {
       response.data.pipe(fs.createWriteStream(path));
       response.data.on('end', async () => {
         const shortUrl = await shortenURL(videoUrl);
-        const messageBody = `╔════ஜ۩۞۩ஜ═══╗\n           𝗜𝘁𝘇 𝗔𝗿𝗬𝗔𝗡\n ╚════ஜ۩۞۩ஜ═══╝\n\n🔗𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝚁𝚄𝙻: ${shortUrl}`;
+        const messageBody = `✅ | 𝗩𝗜𝗗𝗘𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗\n\n—𝗔𝗹𝗶𝗰𝗲 𝗕𝗼𝘁\n🔗 | 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸: ${shortUrl}`;
 
         api.sendMessage({
           body: messageBody,
@@ -246,7 +246,7 @@ module.exports = {
       response.data.pipe(fs.createWriteStream(path));
       response.data.on('end', async () => {
         const shortUrl = await shortenURL(videoUrl);
-        const messageBody = `╔════ஜ۩۞۩ஜ═══╗\n           𝗜𝘁𝘇 𝗔𝗿𝗬𝗔𝗡\n ╚════ஜ۩۞۩ஜ═══╝\n\n🔗𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝚁𝚄𝙻: ${shortUrl}`;
+        const messageBody = `✅ | 𝗩𝗜𝗗𝗘𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗\n\n—𝗔𝗹𝗶𝗰𝗲 𝗕𝗼𝘁\n🔗 | 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸: ${shortUrl}`;
 
         api.sendMessage({
           body: messageBody,
