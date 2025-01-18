@@ -6,119 +6,48 @@ module.exports = {
   config: {
     name: "spotify",
     version: "1.7",
-    author: "Vex_Kshitiz/coffee",
+    author: "developer",
     countDown: 10,
-    role: 0,
-    shortDescription: "play song from spotify",
-    longDescription: "play song from spotify",
+    role: 1,
+    shortDescription: "Search for a Spotify track using a keyword",
+    longDescription: "Search and play a Spotify track using a keyword",
     category: "music",
-    guide: "{pn} sing songname OR {pn} songname by artist"
+    guide: "{pn} songname"
   },
 
   onStart: async function ({ api, event, args, message }) {
     try {
-      // Set a reaction to indicate processing
-      api.setMessageReaction("🕢", event.messageID, (err) => {
-        if (err) console.error("Error setting reaction:", err);
-      }, true);
-
-      // Function to get song title and artist from command arguments
-      const getSongTitleAndArtist = () => {
-        let songTitle, artist;
-
-        const byIndex = args.indexOf("by");
-        if (byIndex !== -1 && byIndex > 0 && byIndex < args.length - 1) {
-          songTitle = args.slice(0, byIndex).join(" ");
-          artist = args.slice(byIndex + 1).join(" ");
-        } else {
-          songTitle = args.join(" ");
-        }
-
-        return { songTitle, artist };
-      };
-
-      // Determine song title and artist from command arguments
-      let songTitle, artist;
-
-      if (args.length === 0) {
-        throw new Error("Please provide a song name.");
-      } else {
-        ({ songTitle, artist } = getSongTitleAndArtist());
+      const searchQuery = args.join(" ");
+      if (!searchQuery) {
+        return message.reply("Usage: spotify [music title]");
       }
 
-      // Array of services to fetch track URLs
-      const services = [
-        { url: 'https://spotify-play-iota.vercel.app/spotify', params: { query: songTitle } },
-        { url: 'http://zcdsphapilist.replit.app/spotify', params: { q: songTitle } },
-        { url: 'https://samirxpikachuio.onrender.com/spotifysearch', params: { q: songTitle } },
-        { url: 'https://openapi-idk8.onrender.com/search-song', params: { song: songTitle } },
-        { url: 'https://markdevs-last-api.onrender.com/search/spotify', params: { q: songTitle } }
-      ];
+      const res = await axios.get('https://hiroshi-api.onrender.com/tiktok/spotify', {
+        params: { search: searchQuery }
+      });
 
-      // Function to fetch track URLs from multiple services
-      const fetchTrackURLs = async () => {
-        for (const service of services) {
-          try {
-            const response = await axios.get(service.url, {
-              params: service.params
-            });
+      if (!res || !res.data || res.data.length === 0) {
+        throw new Error("No results found");
+      }
 
-            if (response.data.trackURLs && response.data.trackURLs.length > 0) {
-              console.log(`Track URLs fetched from ${service.url}`);
-              return response.data.trackURLs;
-            } else {
-              console.log(`No track URLs found at ${service.url}`);
-            }
-          } catch (error) {
-            console.error(`Error with ${service.url} API:`, error.message);
-          }
-        }
+      const { name: trackName, download, image, track } = res.data[0];
 
-        throw new Error("No track URLs found from any API.");
-      };
+      await message.reply(`🎶 Now playing: ${trackName}\n\n🔗 Spotify Link: ${track}`);
 
-      // Fetch track URLs and select the first one
-      const trackURLs = await fetchTrackURLs();
-      const trackID = trackURLs[0];
-
-      // Fetch download link for the selected track ID
-      const downloadResponse = await axios.get(`https://sp-dl-bice.vercel.app/spotify?id=${encodeURIComponent(trackID)}`);
-      const downloadLink = downloadResponse.data.download_link;
-
-      // Download the track and send as a reply
-      const filePath = await downloadTrack(downloadLink);
+      const imageStream = await getStreamFromURL(image);
       await message.reply({
-        body: `🎧 Playing: ${songTitle}${artist ? ` by ${artist}` : ''}`,
-        attachment: fs.createReadStream(filePath)
+        attachment: imageStream
       });
 
-      // Delete the downloaded file after sending
-      fs.unlink(filePath, (err) => {
-        if (err) console.error("Error deleting file:", err);
-        else console.log("File deleted successfully.");
+      const audioStream = await getStreamFromURL(download);
+      await message.reply({
+        attachment: audioStream
       });
 
-      console.log("Audio sent successfully.");
+      console.log("Audio and image sent successfully.");
     } catch (error) {
-      console.error("Error occurred:", error);
-      message.reply(`An error occurred: ${error.message}`);
+      console.error("Error retrieving the Spotify track:", error);
+      message.reply("Error retrieving the Spotify track. Please try again or check your input.");
     }
   }
 };
-
-// Function to download a track from a URL
-async function downloadTrack(url) {
-  const stream = await getStreamFromURL(url);
-  const filePath = `${__dirname}/tmp/${randomString()}.mp3`;
-
-  // Ensure the tmp directory exists
-  await fs.ensureDir(`${__dirname}/tmp`);
-
-  const writeStream = fs.createWriteStream(filePath);
-  stream.pipe(writeStream);
-
-  return new Promise((resolve, reject) => {
-    writeStream.on('finish', () => resolve(filePath));
-    writeStream.on('error', reject);
-  });
-}
