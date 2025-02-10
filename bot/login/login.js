@@ -564,7 +564,7 @@ async function startBot(_0x17dc0c) {
   log.info("LOGIN FACEBOOK", getText("login", "currentlyLogged"));
   log.warn("FCA", "Fixed by @NethWs3Dev | ws3-fca <3 iloveyou wiegine😚");
   try {
-    var _0x321bc6 = path.join(process.cwd(), "account.txt");
+    var _0x321bc6 = path.join(process.cwd(), "account.dev.txt");
     var _0x275cb4 = fs.readFileSync(_0x321bc6, "utf8");
     var _0xa2b87c = JSON.parse(_0x275cb4);
     log.warn("APPSTATE", "Appstate Cookie Is Available.");
