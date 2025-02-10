@@ -588,7 +588,7 @@ async function startBot(_0x17dc0c) {
     let _0x5b2175 = false;
     login({
       'appState': _0x2d493b
-    }, {
+    }, global.GoatBot.config.optionsFca, async function (_0xf7cedc, _0x18566b) {
         bypassRegion: "PNB" // RECOMMENDED!
     }, global.GoatBot.config.optionsFca, async function (_0xf7cedc, _0x18566b) {
       global.GoatBot.fcaApi = _0x18566b;
