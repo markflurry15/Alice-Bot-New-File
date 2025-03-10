@@ -21,7 +21,7 @@ const { spawn } = require("child_process");
 const log = require("./logger/log.js");
 
 function startProject() {
-	const child = spawn("node", ["ArYan.js"], {
+	const child = spawn("node", ["ws3-fca.js"], {
 		cwd: __dirname,
 		stdio: "inherit",
 		shell: true
